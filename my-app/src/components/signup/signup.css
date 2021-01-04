@@ -1,0 +1,79 @@
+.register-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.register-container .title {
+    font-size: 2rem;
+    font-weight: bolder;
+    z-index: 1;
+    text-align: center;
+}
+.register-container .blue-ball, .register-container .orange-ball, .register-container .purple-ball {
+    width: 60%;
+    border-radius: 50%;
+    background-color: #007bff;
+    height: 30%;
+    position: absolute;
+    left: -30%;
+    z-index: -1;
+}
+.register-container .blue-ball {
+    top: -15%;
+}
+.register-container .orange-ball {
+    background-color: #ff6600;
+    top: 10%;
+    height: 80%;
+    z-index: -2;
+}
+.register-container .purple-ball {
+    background-color: #ae00ff;
+    top: 80%;
+}
+.register-container .card {
+    width: 80%;
+    margin: 2em 0;
+    box-shadow: .2px .2px 3px #111111;
+}
+
+@media screen and (min-width: 320px) {
+    .register-container .title {
+        font-size: 2rem;
+        top: .3em;
+    }
+}
+@media screen and (min-width: 375px) {
+    .register-container .title {
+        font-size: 2.5rem;
+        top: .1em;
+    }
+    .register-container input {
+        padding: 1.5em;
+    }
+}
+@media screen and (min-width: 680px) {
+    .register-container .blue-ball, .register-container .orange-ball, .register-container .purple-ball {
+        width: 500px;
+        height: 50%;
+        position: absolute;
+        left: -250px;
+    }
+    .register-container .blue-ball {
+        top: -25%;
+    }
+    .register-container .orange-ball {
+        top: 20%;
+        height: 60%;
+    }
+    .register-container .purple-ball {
+        top: 75%;
+    }
+    .register-container .card {
+        width: 50%;
+    }
+}
