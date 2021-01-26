@@ -1,0 +1,26 @@
+import React from "react";
+import "./transaction.css"
+import TransactionItem from "./TransactionItem";
+
+function Transaction(props) {
+    const { pathname, transactions } = props
+  return (
+    <main className="container mt-3 transaction-container">
+      <div className="title text-center">
+        <h2>{pathname}</h2>
+      </div>
+      <div className="body mt-3">
+        {
+          !!transactions.length ? transactions.map(item => (
+            <TransactionItem id={item._id} amount={item.amount} transaction={item.transaction} pathname={pathname} key={item._id} />
+          )) : (
+            <div className="text-center">No transactions yet...</div>
+          )
+        }
+        
+      </div>
+    </main>
+  );
+}
+
+export default Transaction;

@@ -1,0 +1,13 @@
+.transaction-container {
+    height: 95vh;
+    overflow: auto;
+}
+main .body .card .row .card-col {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.3rem;
+}
+main .body .card .row .card-col a {
+    font-size: 16px;
+}

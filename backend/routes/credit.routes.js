@@ -51,7 +51,7 @@ router
     let credit = await Credit.findById({ _id: id });
     if (credit) {
       // Check if user is authorized
-      if (credit.user !== req.user._id) {
+      if (credit.user.toString() !== req.user._id) {
         return res.status(401).json({
           error: "You are not authorized to make this request",
         });
@@ -82,16 +82,19 @@ router
       const credit = await Credit.findById({ _id: id });
       if (credit) {
         // Check if user is authorized
-        if (credit.user !== req.user._id) {
+        if (credit.user.toString() !== req.user._id) {
           return res.status(401).json({
             error: "You are not authorized to make this request",
           });
         }
         credit.remove();
-      }
-      res
+        return res
         .status(200)
         .json({ success: "Credit transaction has been deleted successfully." });
+      }
+      res
+        .status(404)
+        .json({ error: "Credit transaction does not exist" });
     } catch (error) {
       res.status(400).json({
         error:

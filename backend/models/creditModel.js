@@ -1,22 +1,21 @@
 const { Schema, model } = require("mongoose");
 
-const creditSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+const creditSchema = new Schema(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    transaction: {
+      type: String,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
   },
-  transaction: {
-    type: String,
-    required: true,
-  },
-  amount: {
-    type: Number,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
 module.exports = model("Credit", creditSchema);

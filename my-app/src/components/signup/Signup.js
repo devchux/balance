@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserFetchApi } from "../../hooks/UserGlobalProvider";
+import { GetUserData } from "../../context/UserGlobalProvider";
 import "./signup.css";
 
 function Signup() {
-  let { registerUser } = useContext(UserFetchApi);
+  let { registerUser } = useContext(GetUserData);
   const [user, setUser] = useState({});
   const handleChange = (e) => {
     setUser({

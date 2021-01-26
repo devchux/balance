@@ -1,0 +1,72 @@
+nav {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    display: none;
+    width: 220px;
+    background-color: #007bff;
+}
+.navbar-slide-out {
+    display: block;
+    animation: slideout 1s ease-in-out;
+}
+@keyframes slideout {
+    from {
+        display: block;
+        left: -100%;
+    }
+    to {
+        left: 0;
+    }
+}
+.navbar-slide-in {
+    animation: slidein 1s ease-in-out;
+}
+@keyframes slidein {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: -100%;
+    }
+}
+nav .navbar-logo-container {
+    color: #ffffff;
+    padding: 2em 2em;
+}
+nav .navbar-bottom-content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+nav .navbar-center-content a, nav .navbar-bottom-content a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.3rem;
+    display: block;
+    padding: 1em 3em;
+    font-weight: bolder;
+}
+nav a:hover, nav .active {
+    color: #007bff !important;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.navbar-container .navbar-toggle-button {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index: 10;
+}
+
+@media screen and (min-width: 768px) {
+    nav {
+        display: block;
+        position: relative;
+        left: 0;
+        animation: none;
+        height: 100vh;
+        width: 220px;
+    }
+}

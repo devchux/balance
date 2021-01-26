@@ -1,20 +1,36 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserFetchApi } from "../../hooks/UserGlobalProvider";
+import { GetUserData } from "../../context/UserGlobalProvider";
 import "../signup/signup.css";
 
 function Signin() {
-  let { loginUser } = useContext(UserFetchApi);
+  let { state, loginUser } = useContext(GetUserData);
   const [user, setUser] = useState({});
+  const [error, setError] = useState("");
+
+  // handle input change
   const handleChange = (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
+
+  // handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { email, password } = user;
+
+    // set default error values
+    setError('')
+
+    // form validation
+    if (!email || !password) {
+      setError("Enter both fields!");
+      return;
+    }
     loginUser(user);
+    
   };
   return (
     <div className="register-container">
@@ -25,7 +41,15 @@ function Signin() {
       <div className="card">
         <div className="card-body">
           <h4 className="card-title text-center mb-3">Sign In</h4>
-          <form onSubmit={handleSubmit} method="POST">
+
+          {/* Log frontend authentication error */}
+          {error && (
+            <div className="alert alert-danger" role="alert">
+              <strong>{error}</strong>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <input
                 type="email"
@@ -57,7 +81,9 @@ function Signin() {
         </div>
       </div>
       <div>
-        <p>You do not have an account? <Link to="/register">Sign Up</Link></p>
+        <p>
+          You do not have an account? <Link to="/register">Sign Up</Link>
+        </p>
       </div>
     </div>
   );

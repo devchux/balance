@@ -51,7 +51,7 @@ router
     let debit = await Debit.findById({ _id: id });
     if (debit) {
       // Check if user is authorized
-      if (debit.user !== req.user._id) {
+      if (debit.user.toString() !== req.user._id) {
         return res.status(401).json({
           error: "You are not authorized to make this request",
         });
@@ -59,7 +59,7 @@ router
       debit.transaction = transaction ? transaction : debit.transaction;
       if (amount) {
         if (isNaN(amount)) {
-          res.status(400).json({
+          return res.status(400).json({
             error: "Amount is not a number",
           });
         } else {
@@ -82,7 +82,7 @@ router
       const debit = await Debit.findById({ _id: id });
 
       // Check if user is authorized
-      if (debit.user !== req.user._id) {
+      if (debit.user.toString() !== req.user._id) {
         return res.status(401).json({
           error: "You are not authorized to make this request",
         });

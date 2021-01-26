@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { verifyToken } = require("../middlewares/verifyToken");
-const { storeTokenInCookie } = require("../helpers/storeTokenInCookie");
+const { storeTokenInCookie } = require("../helpers/signToken");
 
 const router = express.Router();
 
@@ -36,9 +36,7 @@ router.route("/signup").post((req, res) => {
         User.create({ firstname, lastname, email, password })
           .then((user) => {
             // Create and store token
-            storeTokenInCookie(res, user);
-
-            res.status(200).json(user);
+            storeTokenInCookie(res, jwt, user);
           })
           .catch((err) => {
             debug("User registeration failed: " + err);
@@ -59,11 +57,11 @@ router.route("/signin").post(async (req, res) => {
   }
 
   try {
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email }).select('password');
     if (!user) {
       return res
-        .status(400)
-        .json({ error: `Could find any user with email: ${email}` });
+        .status(404)
+        .json({ error: `User not found` });
     }
     bcrypt.compare(password, user.password, (err, match) => {
       if (err) {
@@ -74,20 +72,14 @@ router.route("/signin").post(async (req, res) => {
       }
 
       // Create and store token
-      storeTokenInCookie(res, user);
-
-      res.status(200).json(user);
+      storeTokenInCookie(res, jwt, user);
     });
   } catch (error) {
     debug(`Login user not found: ${error.message}`);
-    return res
-      .status(400)
-      .json({ error: `Could find any user with email: ${email}` });
   }
 });
 
 router.get("/user", verifyToken, (req, res) => {
-  debug(req.user);
   User.findOne({ _id: req.user._id }).exec((err, user) => {
     if (err) throw err;
     res.json({ user });
@@ -95,7 +87,6 @@ router.get("/user", verifyToken, (req, res) => {
 });
 
 router.get("/users", (req, res) => {
-  debug(req.user);
   User.find().exec((err, users) => {
     if (err) throw err;
     res.json({ users });
