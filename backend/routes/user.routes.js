@@ -3,8 +3,7 @@ const debug = require("debug")("app:userRoutes");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { verifyToken } = require("../middlewares/verifyToken");
-const { storeTokenInCookie } = require("../helpers/signToken");
+const { storeToken } = require("../helpers/signToken");
 
 const router = express.Router();
 
@@ -36,7 +35,7 @@ router.route("/signup").post((req, res) => {
         User.create({ firstname, lastname, email, password })
           .then((user) => {
             // Create and store token
-            storeTokenInCookie(res, jwt, user);
+            storeToken(res, jwt, user);
           })
           .catch((err) => {
             debug("User registeration failed: " + err);
@@ -72,25 +71,11 @@ router.route("/signin").post(async (req, res) => {
       }
 
       // Create and store token
-      storeTokenInCookie(res, jwt, user);
+      storeToken(res, jwt, user);
     });
   } catch (error) {
     debug(`Login user not found: ${error.message}`);
   }
-});
-
-router.get("/user", verifyToken, (req, res) => {
-  User.findOne({ _id: req.user._id }).exec((err, user) => {
-    if (err) throw err;
-    res.json({ user });
-  });
-});
-
-router.get("/users", (req, res) => {
-  User.find().exec((err, users) => {
-    if (err) throw err;
-    res.json({ users });
-  });
 });
 
 module.exports = router;

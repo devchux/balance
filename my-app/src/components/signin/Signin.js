@@ -4,7 +4,7 @@ import { GetUserData } from "../../context/UserGlobalProvider";
 import "../signup/signup.css";
 
 function Signin() {
-  let { state, loginUser } = useContext(GetUserData);
+  let { loginUser } = useContext(GetUserData);
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
 
@@ -77,6 +77,7 @@ function Signin() {
                 Login
               </button>
             </div>
+            <p className="py-2">Forgot password? Click <Link to="#">here</Link></p>
           </form>
         </div>
       </div>

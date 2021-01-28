@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Page404 from "../404/Page404";
 import AddTransaction from "../add/AddTransaction";
 import Credit from "../credits/Credit";
 import Debit from "../debits/Debit";
 import Navbar from "../navbar/Navbar";
+import Home from "../profile/Home";
 import "./dashboard.css";
 
 function Dashboard() {
@@ -25,6 +26,7 @@ function Dashboard() {
           path="/dashboard/add/debits/:id"
           component={AddTransaction}
         />
+        <Route exact path="/dashboard/home" component={Home} />
         <Route component={Page404} />
       </Switch>
     </div>

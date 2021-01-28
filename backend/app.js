@@ -7,7 +7,6 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const creditRouter = require('./routes/credit.routes')
 const debitRouter = require('./routes/debit.routes')
-const apiRouter = require('./routes/api.routes')
 const userRouter = require('./routes/user.routes')
 
 dotenv.config();
@@ -47,7 +46,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
 
 // Routes
-app.use("/api", apiRouter);
 app.use("/api", creditRouter);
 app.use("/api", debitRouter);
 app.use("/api/auth", userRouter);

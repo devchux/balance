@@ -12,7 +12,7 @@ function Transaction(props) {
       <div className="body mt-3">
         {
           !!transactions.length ? transactions.map(item => (
-            <TransactionItem id={item._id} amount={item.amount} transaction={item.transaction} pathname={pathname} key={item._id} />
+            <TransactionItem id={item._id} amount={item.amount} transaction={item.transaction} pathname={pathname} key={item._id} date={item.updatedAt} />
           )) : (
             <div className="text-center">No transactions yet...</div>
           )

@@ -1,4 +1,4 @@
-exports.storeTokenInCookie = function (res, jwt, user) {
+exports.storeToken = function (res, jwt, user) {
   let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRATION_DEADLINE,
   });
