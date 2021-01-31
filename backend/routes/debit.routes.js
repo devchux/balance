@@ -11,7 +11,7 @@ const router = express.Router();
 router
   .route("/debits")
   .get(verifyToken, async (req, res) => {
-    const debits = await Debit.find();
+    const debits = await Debit.find({ user: req.user._id });
     if (!debits) {
       res.status(500).json({
         error: "A error occured!! There are no debits in the database",

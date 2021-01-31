@@ -1,8 +1,10 @@
-.transaction-container {
-    height: 95vh;
+.transaction-container, .home-container {
+    height: 100vh;
+    width: 100%;
+    padding: 0 1em;
     overflow: auto;
 }
-main .body .card .row .card-col {
+main .body .card .row .card-col, .home-container .card .row .card-col {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -10,4 +12,10 @@ main .body .card .row .card-col {
 }
 main .body .card .row .card-col a {
     font-size: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+    .transaction-container, .home-container {
+        padding: 0 2em;
+    }
 }

@@ -31,7 +31,7 @@ function UserGlobalProvider({ children }) {
       .post("http://127.0.0.1:5000/api/auth/signup", data)
       .then((result) => {
         dispatch({ type: "GET_USER", payload: result.data });
-        window.location = "/dashboard"
+        window.location = "/dashboard/hme"
       })
       .catch((err) => {
         dispatch({ type: "GET_ERROR", payload: err.response.data });
@@ -45,15 +45,34 @@ function UserGlobalProvider({ children }) {
       .post("http://127.0.0.1:5000/api/auth/signin", data)
       .then((result) => {
         dispatch({ type: "GET_USER", payload: result.data });
-        window.location = "/dashboard/credits"
+        window.location = "/dashboard/home"
       })
       .catch((err) => {
         dispatch({ type: "GET_ERROR", payload: err.response.data });
         toast.error(err.response.data.error)
       });
   };
+
+  //check user auth status
+  const checkUser = () => {
+    axios.get("http://127.0.0.1:5000/api/auth/user", {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    })
+    .then((result) => {
+      result.data.token = localStorage.getItem("token")
+      dispatch({ type: "GET_USER", payload: result.data });
+      toast.info(result.data.success)
+    })
+    .catch((err) => {
+      dispatch({ type: "GET_ERROR", payload: err.response.data });
+      toast.error(err.response.data.error)
+    });
+  }
+
   return (
-    <GetUserData.Provider value={{ registerUser, loginUser, state }}>
+    <GetUserData.Provider value={{ registerUser, loginUser, state, checkUser }}>
       {children}
     </GetUserData.Provider>
   );

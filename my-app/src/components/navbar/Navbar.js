@@ -29,6 +29,12 @@ function Navbar() {
       }
     })
   }, []);
+
+  // logout user
+  function logout() {
+    return localStorage.removeItem('token')
+  }
+
   return (
     <div className="navbar-container">
       <button
@@ -48,7 +54,7 @@ function Navbar() {
           <NavLink to="/dashboard/debits">Debits</NavLink>
         </div>
         <div className="navbar-bottom-content">
-          <Link to="/logout">Sign Out</Link>
+          <Link to="#" onClick={logout}>Sign Out</Link>
         </div>
       </nav>
     </div>

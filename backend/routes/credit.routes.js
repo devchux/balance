@@ -11,7 +11,7 @@ const router = express.Router();
 router
   .route("/credits")
   .get(verifyToken, async (req, res) => {
-    const credits = await Credit.find({ user: req.user._id }).populate('user');
+    const credits = await Credit.find({ user: req.user._id });
     if (!credits) {
       res.status(500).json({
         error: "A error occured!! There are no credits in the database",

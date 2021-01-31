@@ -1,0 +1,48 @@
+.home-container .wallet-container {
+    margin: 2em 0;
+    overflow-x: auto;
+    display: grid;
+    grid-template-rows: 100px;
+    grid-template-columns: repeat(3, 200px);
+    gap: 1em;
+}
+.home-container .wallet-container .card {
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+}
+.home-container .wallet-container .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #fff;
+}
+.card-text {
+    font-size: 1.25rem;
+}
+.home-container .wallet-container .card:nth-of-type(2) {
+    background-color: #ff6600 !important;
+}
+.home-container .wallet-container .card:nth-of-type(3) {
+    background-color: #ae00ff !important;
+}
+.history-div {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+.history-div .h-line {
+    position: absolute;
+    width: calc(100% - 6em);
+    height: 2px;
+    left: 6em;
+    top: 50%;
+    transform: rotateY(-50%);
+    background-color: rgb(133, 133, 133);
+}
+@media only screen and (min-width: 1024px) {
+    .home-container .wallet-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

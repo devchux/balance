@@ -1,32 +1,40 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Page404 from "../404/Page404";
 import AddTransaction from "../add/AddTransaction";
 import Credit from "../credits/Credit";
 import Debit from "../debits/Debit";
 import Navbar from "../navbar/Navbar";
-import Home from "../profile/Home";
+import Home from "../home/Home";
 import "./dashboard.css";
+import ProtectedRoute from "../protected route/ProtectedRoute";
+import { GetUserData } from "../../context/UserGlobalProvider";
 
 function Dashboard() {
+  const { checkUser, state: { error } } = useContext(GetUserData)
+
+  useEffect(()=>{
+    checkUser()
+  },[])
+
   return (
     <div className="dashboard-container">
       <Navbar />
       <Switch>
-        <Route exact path="/dashboard/credits" component={Credit} />
-        <Route exact path="/dashboard/debits" component={Debit} />
-        <Route exact path="/dashboard/add" component={AddTransaction} />
-        <Route
+        <ProtectedRoute exact path="/dashboard/credits" user={localStorage.getItem('token')} error={error} component={Credit} />
+        <ProtectedRoute exact path="/dashboard/debits" user={localStorage.getItem('token')} error={error} component={Debit} />
+        <ProtectedRoute exact path="/dashboard/add" user={localStorage.getItem('token')} error={error} component={AddTransaction} />
+        <ProtectedRoute
           exact
-          path="/dashboard/add/credits/:id"
+          path="/dashboard/add/credits/:id" user={localStorage.getItem('token')} error={error}
           component={AddTransaction}
         />
-        <Route
+        <ProtectedRoute
           exact
-          path="/dashboard/add/debits/:id"
+          path="/dashboard/add/debits/:id" user={localStorage.getItem('token')} error={error}
           component={AddTransaction}
         />
-        <Route exact path="/dashboard/home" component={Home} />
+        <ProtectedRoute exact path="/dashboard/home" user={localStorage.getItem('token')} error={error} component={Home} />
         <Route component={Page404} />
       </Switch>
     </div>

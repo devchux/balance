@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { storeToken } = require("../helpers/signToken");
+const { verifyToken } = require("../middlewares/verifyToken");
 
 const router = express.Router();
 
@@ -77,5 +78,14 @@ router.route("/signin").post(async (req, res) => {
     debug(`Login user not found: ${error.message}`);
   }
 });
+
+/*
+  @route GET api/auth/user
+  @desc To check if the user is logged in
+  @access private
+*/
+router.route('/user').get(verifyToken, (req, res) => {
+  res.status(200).json({success: 'You are welcome'})
+})
 
 module.exports = router;

@@ -7,7 +7,7 @@ function DebitGlobalProvider({ children }) {
   let debitState = {
     debits: [],
     error: "",
-    success: "",
+    success: ""
   };
 
   function DebitReducer(state = debitState, action) {
