@@ -10,7 +10,7 @@ const debitRouter = require('./routes/debit.routes')
 const userRouter = require('./routes/user.routes')
 
 dotenv.config();
-const PORT = process.env.PORT || 5000;
+
 
 // Create database connection
 mongoose.connect(
@@ -55,4 +55,4 @@ app.get('/', (req, res) => {
   res.send('testing...')
 })
 
-app.listen(PORT, "127.0.0.1", debug(`App created on port => ${PORT}`));
+app.listen(process.env.PORT || 5000, "127.0.0.1", debug(`App created on port => ${process.env.PORT || 5000}`));

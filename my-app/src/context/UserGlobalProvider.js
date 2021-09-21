@@ -28,7 +28,7 @@ function UserGlobalProvider({ children }) {
   // Register user func
   const registerUser = (data) => {
     axios
-      .post("http://127.0.0.1:5000/api/auth/signup", data)
+      .post("https://mybalance-api.herokuapp.com/api/auth/signup", data)
       .then((result) => {
         dispatch({ type: "GET_USER", payload: result.data });
         window.location = "/dashboard/hme"
@@ -42,7 +42,7 @@ function UserGlobalProvider({ children }) {
   // Login user func
   const loginUser = (data) => {
     axios
-      .post("http://127.0.0.1:5000/api/auth/signin", data)
+      .post("https://mybalance-api.herokuapp.com/api/auth/signin", data)
       .then((result) => {
         dispatch({ type: "GET_USER", payload: result.data });
         window.location = "/dashboard/home"
@@ -55,7 +55,7 @@ function UserGlobalProvider({ children }) {
 
   //check user auth status
   const checkUser = () => {
-    axios.get("http://127.0.0.1:5000/api/auth/user", {
+    axios.get("https://mybalance-api.herokuapp.com/api/auth/user", {
       headers: {
         authorization: localStorage.getItem("token"),
       },

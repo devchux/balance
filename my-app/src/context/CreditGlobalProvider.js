@@ -50,7 +50,7 @@ function CreditGlobalProvider({ children }) {
 
   function getCreditFromApi() {
     axios
-      .get("http://127.0.0.1:5000/api/credits", {
+      .get("https://mybalance-api.herokuapp.com/api/credits", {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -66,7 +66,7 @@ function CreditGlobalProvider({ children }) {
 
   function addCreditToApi(data) {
     axios
-      .post("http://127.0.0.1:5000/api/credits", data, {
+      .post("https://mybalance-api.herokuapp.com/api/credits", data, {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -82,7 +82,7 @@ function CreditGlobalProvider({ children }) {
   }
   function deleteCreditFromApi(id) {
     axios
-      .delete(`http://127.0.0.1:5000/api/credits/${id}`, {
+      .delete(`https://mybalance-api.herokuapp.com/api/credits/${id}`, {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -98,7 +98,7 @@ function CreditGlobalProvider({ children }) {
   }
   function updateCreditFromApi(id, data) {
     axios
-      .put(`http://127.0.0.1:5000/api/credits/${id}`, data, {
+      .put(`https://mybalance-api.herokuapp.com/api/credits/${id}`, data, {
         headers: {
           authorization: localStorage.getItem("token"),
         },

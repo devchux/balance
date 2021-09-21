@@ -50,7 +50,7 @@ function DebitGlobalProvider({ children }) {
 
   function getDebitFromApi() {
     axios
-      .get("http://127.0.0.1:5000/api/debits", {
+      .get("https://mybalance-api.herokuapp.com/api/debits", {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -66,7 +66,7 @@ function DebitGlobalProvider({ children }) {
 
   function addDebitToApi(data) {
     axios
-      .post("http://127.0.0.1:5000/api/debits", data, {
+      .post("https://mybalance-api.herokuapp.com/api/debits", data, {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -82,7 +82,7 @@ function DebitGlobalProvider({ children }) {
   }
   function deleteDebitFromApi(id) {
     axios
-      .delete(`http://127.0.0.1:5000/api/debits/${id}`, {
+      .delete(`https://mybalance-api.herokuapp.com/api/debits/${id}`, {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -99,7 +99,7 @@ function DebitGlobalProvider({ children }) {
 
   function updateDebitFromApi(id, data) {
     axios
-      .put(`http://127.0.0.1:5000/api/debits/${id}`, data, {
+      .put(`https://mybalance-api.herokuapp.com/api/debits/${id}`, data, {
         headers: {
           authorization: localStorage.getItem("token"),
         },
