@@ -30,9 +30,7 @@ const app = express();
 
 // Apply Cors middleware
 app.use(cors({
-  origin: [
-    'http://localhost:3000'
-  ]
+  origin: '*'
 }));
 
 // Apply morgan middleware
@@ -55,4 +53,4 @@ app.get('/', (req, res) => {
   res.send('testing...')
 })
 
-app.listen(process.env.PORT || 5000, "127.0.0.1", debug(`App created on port => ${process.env.PORT || 5000}`));
+app.listen(process.env.PORT || 5000, () => debug(`App created on port => ${process.env.PORT || 5000}`));
