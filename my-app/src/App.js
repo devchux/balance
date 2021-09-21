@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Signup from "./components/signup/Signup";
 import UserGlobalProvider from "./context/UserGlobalProvider";
 import "./assets/css/main.css";
@@ -21,6 +21,11 @@ function App() {
               <Route path="/dashboard" exaxt component={Dashboard} />
               <Route path="/register" exaxt component={Signup} />
               <Route path="/login" exaxt component={Signin} />
+              <Route path="/" exaxt render={() => {
+                const token = localStorage.getItem("token");
+                if (token) return <Redirect to='/dashboard' />
+                return <Redirect to='/login' />
+              }} />
               <Route component={Page404} />
               </Switch>
           </BrowserRouter>
