@@ -1,11 +1,9 @@
 import React, { useReducer, createContext } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export let GetUserData = createContext({});
 function UserGlobalProvider({ children }) {
-  let history = useHistory();
   let initialState = {
     success: "",
     error: "",
@@ -33,7 +31,7 @@ function UserGlobalProvider({ children }) {
       .post("https://mybalance-api.herokuapp.com/api/auth/signup", data)
       .then((result) => {
         dispatch({ type: "GET_USER", payload: result.data });
-        history.push("/dashboard/home");
+        window.location = "/dashboard/home"
       })
       .catch((err) => {
         dispatch({ type: "GET_ERROR", payload: err.response.data });
@@ -47,7 +45,7 @@ function UserGlobalProvider({ children }) {
       .post("https://mybalance-api.herokuapp.com/api/auth/signin", data)
       .then((result) => {
         dispatch({ type: "GET_USER", payload: result.data });
-        history.push("/dashboard/home");
+        window.location = "/dashboard/home"
       })
       .catch((err) => {
         dispatch({ type: "GET_ERROR", payload: err.response.data });
